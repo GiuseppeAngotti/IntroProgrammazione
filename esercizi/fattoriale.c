@@ -1,4 +1,4 @@
-/*#include <stdio.h>
+#include <stdio.h>
 
 int main(void) 
 {
@@ -10,4 +10,4 @@ int main(void)
         n=n-1;
     }
     printf("Il fattoriale di n è uguale a %d",f);
-}*/
+}
