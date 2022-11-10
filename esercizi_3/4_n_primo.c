@@ -1,8 +1,7 @@
 #include <stdio.h>
 
-int primo(int x)
+int primo_ite(int x)
 {
-    int non_primo;
     if(x==1)
         return (0);
     for(int i=2;i<x;i++)
@@ -12,16 +11,34 @@ int primo(int x)
     }
     return (1);
 }
-void test()
+
+int primo_ric(int x, int x_1)
 {
-    int c=0;
+    if(x_1==1)
+    {
+        return (1);
+    }
+    if(x%(x_1)==0)
+    {  
+        return (0);
+    }
+    return(primo_ric(x,x_1-1));
+}
+
+/*void test()
+{
+    int c=0,a,b;
+    float=distanza;
     for(int i=1;i<=100;i++)
     {
-        if(primo(i)==1)
+        if(primo_ite(i)==1)
+        {
             c++;
+            primo_ite(i)
+        }
     }
     printf("I numeri primi trovati da 1 a 100 sono: %d",c);
-}
+}*/
 
 int main()
 {
@@ -29,13 +46,18 @@ int main()
 
     printf("Inserire il numero per controllare se esso sia primo: ");
     scanf("%d",&x);
-
-    if(primo(x)==0)
+    int x_1=x-1;
+    
+    if(primo_ite(x)==0)
+        printf("%d non è primo.\n",x);
+    else
+        printf("%d è primo.\n",x);
+    if(primo_ric(x,x_1)==0)
         printf("%d non è primo.\n",x);
     else
         printf("%d è primo.\n",x);
 
-    test();
+    //test();
     
     return (0);
 }
