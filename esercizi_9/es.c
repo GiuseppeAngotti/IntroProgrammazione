@@ -9,7 +9,14 @@ typedef struct nodo
 
 typedef elemento* puntatore;
 
-void stampa_lista_ite(puntatore a)
+int dim_lista(puntatore a)
+{
+    if(a==NULL)
+        return 0;
+    return 1+dim_lista(a);
+}
+
+void stampa_lista(puntatore a)
 {
     while(a!=NULL)
     {
@@ -22,91 +29,87 @@ void stampa_lista_ite(puntatore a)
 puntatore crea_lista()
 {
     puntatore testa;
-    puntatore attuale;
     int n;
-    printf("Inserire il numero di elementi della lista: ");
-    scanf("%d", &n);
+    printf("Inserire la lunghezza della lista: ");
+    scanf("%d",&n);
+    puntatore attuale;
+    
     for(int i=0;i<n;i++)
     {
-        printf("Inserire valore: ");
+        printf("Inserire un valore: ");
         if(i==0)
         {
             attuale=malloc(sizeof(elemento));
-            scanf("%d", &attuale->valore);
+            scanf("%d",&attuale->valore);
             testa=attuale;
         }
         else
         {
             attuale=attuale->successivo=malloc(sizeof(elemento));
-            scanf("%d", &attuale->valore);
+            scanf("%d",&attuale->valore);
         }
     }
     attuale->successivo=NULL;
     return testa;
 }
 
-int dim_lista(puntatore a)
+int s_min(puntatore a, int k)
 {
-    if (a==NULL)
-        return 0;
-    return (1+dim_lista(a->successivo));
+    int val;
+    int min_prec=k;
+    int min_ora;
+    int n=dim_lista(a);
+    printf("%d",n);
+    /*for(int i=0;i<n;i++)
+    {
+        if(k>= a->valore )
+        {
+            min_ora=k-a->valore;
+            if(min_prec > min_ora)
+            {
+                min_prec=min_ora;
+                val=a->valore;
+            }
+        }
+        a=a->successivo;
+    }*/
+    
+    return val;
 }
 
-puntatore unisci_liste(puntatore a,puntatore b, int j)
+puntatore inserisci_elemento(puntatore a,int k)
 {
-    int n=dim_lista(a);
+    printf("sono dentro inserisci elemento");
     puntatore testa;
+    puntatore attuale;
     puntatore temp;
-    
-    if(j<=0)
+    int minimo_k=s_min(a,k);
+    /*while(i<n)
     {
-        testa=b;
-        while(b->successivo!=NULL)
-            b=b->successivo;
-        b->successivo=a;
-    }
-    if(j>=n)
-    {
-        testa=a;
-        while(a->successivo!=NULL)
-            a=a->successivo;
-        a->successivo=b;
-    }
-    else
-    {
-        testa=a;
-        for(int i=1;i<n;i++)
+        if(attuale->valore => k)
         {
-            if(i==j)
-            {
-                temp=a->successivo;
-                a->successivo=b;
-                while(b->successivo!=NULL)
-                    b=b->successivo;
-            }
-            if(i>j)
-                b->successivo=temp;
-            else
-                a=a->successivo;
+            temp=attuale->successivo;
+            attuale=attuale->successivo=malloc(sizeof(elemento));
+            attuale->valore=k;
+            attuale->successivo=temp;
         }
+        else
+            attuale=attuale->successivo;
     }
-    
+    */
     return testa;
 }
 
 void main(void)
 {
     puntatore a=crea_lista();
-    puntatore b=crea_lista();
+    stampa_lista(a);
 
-    int j;
-    printf("Inserire j: ");
-    scanf("%d", &j);
+    int k;
 
-    stampa_lista_ite(a);
-    stampa_lista_ite(b);
-
-    puntatore c=unisci_liste(a,b,j);
-    stampa_lista_ite(c);
-
+    printf("Inserire valore da inserire nella lista: ");
+    scanf("%d",&k);
+    
+    a=inserisci_elemento(a,k);
+    stampa_lista(a);
 }
