@@ -7,7 +7,7 @@ typedef struct nodo
 {
     int* array;
     int dim;
-    int *successivo;
+    struct nodo *successivo;
 }elemento;
 
 typedef elemento* puntatore;
